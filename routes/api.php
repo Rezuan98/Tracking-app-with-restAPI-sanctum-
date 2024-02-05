@@ -25,8 +25,18 @@ Route::group(['middleware' => 'auth:sanctum'], function(){
     
     
     Route::get('/profile',[DataController::class,'profile'])->name('profile');
-
+    Route::post('/insert/task',[DataController::class,'insertTask']);
+    Route::get('/get/task/data',[DataController::class,'getTaskData']);
+    Route::post('/start/task',[DataController::class,'startTask']);
+    Route::post('/end/task',[DataController::class,'endTask']);
+   
     Route::get('logout',[AuthController::class,'logout']);
+
+
+    Route::get('/total/task',[DataController::class,'totalTask']);
+
+    Route::get('/total/project',[DataController::class,'totalProject']);
+    Route::get('/total/income',[DataController::class,'totalIncome']);
    
 
-});;
+});
