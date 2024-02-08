@@ -81,14 +81,14 @@ public function updateMarketer(Request $request,$id){
         
 
 
-      'name' => $request-> marketer_name,
-         'email' => $request-> marketer_email,
-         'username' => $request-> marketer_username,
-         'phone' => $request-> marketer_phone,
-         'nid' => $request-> marketer_nid,
-         'address' => $request-> marketer_address,
-        
-         'manager' => $request-> area_manager,
+      'name' => $request-> name,
+      'email' => $request-> email,
+      'phone' => $request-> phone,
+      'nid' => $request-> nid,
+      'address' => $request-> address,
+      
+     
+         
          
    ]);
    return redirect('all/marketer');

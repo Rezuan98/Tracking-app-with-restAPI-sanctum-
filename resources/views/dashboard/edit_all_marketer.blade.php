@@ -1,5 +1,5 @@
 @extends('dashboard.master')
-
+@section('title','Edit Markter Profile')
 @section('body')
 <h3>Edit Marketer Information:</h5>
     <div class="card">
@@ -13,29 +13,29 @@
     
                 <div class="mb-3">
                     <label for="exampleInputText1" class="form-label">Marketer Name</label>
-                    <input type="text" name="marketer_name" value="{{$marketerData->name}}" class="form-control" id="exampleInputText1">
+                    <input type="text" name="name" value="{{$marketerData->name}}" class="form-control" id="exampleInputText1">
                 </div>
             
                 <div class="mb-3">
                     <label for="exampleInputEmail3" class="form-label">Marketer Email</label>
-                    <input type="email" name="marketer_email" value="{{$marketerData->email}}" class="form-control" id="exampleInputEmail3"  placeholder="Enter Email">
+                    <input type="email" name="email" value="{{$marketerData->email}}" class="form-control" id="exampleInputEmail3"  placeholder="Enter Email">
                 </div>
                
             
                 <div class="mb-3">
                     <label for="exampleInputNumber1" class="form-label">Phone</label>
-                    <input type="phone" value="{{$marketerData->phone}}" name="marketer_phone" class="form-control" id="exampleInputNumber1" >
+                    <input type="phone" value="{{$marketerData->phone}}" name="phone" class="form-control" id="exampleInputNumber1" >
                 </div>
             
                 <div class="mb-3">
                     <label for="exampleInputPassword3" class="form-label">NID</label>
-                    <input type="text" value="{{$marketerData->nid}}" name="marketer_nid" class="form-control" id="exampleInputPassword3"  placeholder="Enter Password">
+                    <input type="text" value="{{$marketerData->nid}}" name="nid" class="form-control" id="exampleInputPassword3"  placeholder="Enter Password">
                 </div>
                
             
                 <div class="mb-3">
                     <label for="exampleInputDisabled1" class="form-label">Address</label>
-                    <input type="text" value="{{$marketerData->address}}" name="marketer_address" class="form-control" id="exampleInputDisabled1"  >
+                    <input type="text" value="{{$marketerData->address}}" name="address" class="form-control" id="exampleInputDisabled1"  >
                 </div>
             
                

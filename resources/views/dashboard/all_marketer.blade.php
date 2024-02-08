@@ -1,5 +1,5 @@
 @extends('dashboard.master')
-
+@section('title','All Marketer List')
 @section('body')
 
 <div class="card-body">

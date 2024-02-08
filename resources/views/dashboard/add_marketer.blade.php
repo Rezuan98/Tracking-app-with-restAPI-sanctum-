@@ -1,6 +1,6 @@
 @extends('dashboard.master')
 
-
+@section('title','Admin-FrelanceIT')
 @section('body')
 <h3>Add Marketer</h5>
 <div class="card">
