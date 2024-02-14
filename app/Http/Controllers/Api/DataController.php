@@ -98,28 +98,34 @@ public function startTask(Request $request){
         
 
     $user = auth()->user();
+    $date = Carbon::now()->toDateString();
+     $time = Carbon::now()-> toTimeString();
     DB::table('attendances')->insert([
         'user_id' => $user->id,
         'name'=> $user->name,
-        'starting_time' => carbon::now(),
+        'date' => $date,
+        'starting_time' => $time,
 
     ]);
     $success['name'] = $user->name;
-    $success['starting_at'] = carbon::now();
+    $success['starting_at'] =  $time;
     return $this->sendResponse($success, ' Task successfully started');
 }
 public function endTask(Request $request){
         
 
     $user = auth()->user();
+    $date = Carbon::now()->toDateString();
+     $time = Carbon::now()-> toTimeString();
     DB::table('attendances')->insert([
         'user_id' => $user->id,
         'name'=> $user->name,
-        'end_time' => carbon::now(),
+        'date' => $date,
+        'end_time' => $time,
 
     ]);
     $success['name'] = $user->name;
-    $success['Ending_at'] = carbon::now();
+    $success['Ending_at'] =  $time;
     return $this->sendResponse($success, ' Task successfully ended');
 
 }

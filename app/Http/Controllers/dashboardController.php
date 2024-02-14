@@ -7,9 +7,16 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Carbon\Carbon;
 
 class dashboardController extends Controller
 {
+
+   public function login(){
+
+      return view('dashboard.login');
+
+   }
    public function home(){
 
     return view('dashboard.index');
@@ -61,9 +68,19 @@ class dashboardController extends Controller
    public function allMarketer(){
 
       $marketer = DB::table('users')->get();
-
-      return view('dashboard.all_marketer',['marketer' => $marketer]);
-   } 
+      $date = Carbon::now()->toDateString();
+      $attendance = [];
+  
+      foreach ($marketer as $marketerid) {
+          $attendance[$marketerid->id] = DB::table('attendances')
+              ->where('user_id', $marketerid->id)
+              ->whereDate('date', $date)
+              ->first();
+      }
+  
+      return view('dashboard.all_marketer', compact('marketer', 'attendance'));
+  }
+  
    // end retrieving marketer data methode 
 
 
@@ -101,5 +118,38 @@ public function deleteMarketer($id){
 
 
 }
+
+// public function showAttendance($id){
+
+
+   
+
+//    $attendance = DB::table('attendances')->where('user_id',$id)->where('date', )->first();
+
+
+//    return view('dashboard.all_marketer',compact('attendance'));
+//   $present = 'Yes';
+   // if($attendance){
+   // return view('dashboard.all_marketer',compact('present'));
+   // }else{
+
+   //    $present = 'No';
+
+   //    return view('dashboard.all_marketer',compact('present'));
+
+   // }
+
+public function viewData($id){
+
+    $marketer = DB::table('users')->where('id',$id)->get();
+
+     $performance = DB::table('performances')->where('user_id',$id)->get();
+
+     $task = DB::table('tasks')->where('user_id',$id)->get();
+
+   
+
+   return view('dashboard.view',compact('marketer','task','performance'));
 }
 
+}

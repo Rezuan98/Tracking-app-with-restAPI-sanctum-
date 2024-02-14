@@ -3,7 +3,9 @@
 @section('body')
 
 <div class="card-body">
-    <h6 class="card-title">All Marketers List</h6>
+    <h4 class="card-title">All Marketers List</h4>
+
+    <a href="{{route('add.marketer')}}"><button type="button" class="btn btn-success mt-2">Add New Marketer</button></a>
     
     <div class="table-responsive">
             <table class="table table-hover">
@@ -11,6 +13,7 @@
                     <tr>
                         <th>Sl</th>
                         <th>Marketer Name</th>
+                        <th>Attendance</th>
                         <th>Mobile</th>
                         <th>Address</th>
                         
@@ -20,9 +23,21 @@
                 </thead>
                 <tbody>
                     @foreach ($marketer as $item)
+                    
                     <tr>
                         <th>{{$item->id}}</th>
-                        <td>{{$item->name}}</td>
+                        <td>{{$item->name}} </td>
+                        <td>
+                           
+                           
+                            @if($attendance[$item->id])
+                               <span type="button" class="btn btn-outline-info"> Present</span>
+                            @else
+                               <span type="button" class="btn btn-outline-danger"> Absent</span>
+                            @endif
+                           
+                       
+             </td>
                         <td>{{$item->phone}}</td>
                         <td>{{$item->address}}</td>
                        
@@ -31,7 +46,8 @@
 
                         <td><a href="{{route('edit.all.marketer',$item->id)}}"><button class="btn btn-success">Edit</button></a>
                             <a href="{{route('delete.marketer',$item->id)}}"><button class="btn btn-warning">delete</button></a>
-                            <a href="#"><button class="btn btn-primary">view</button></a>
+                            <a href="{{route('view.data',$item->id)}}"><button class="btn btn-primary">View</button></a>
+                           
                         </td>
                     </tr>
                     @endforeach
