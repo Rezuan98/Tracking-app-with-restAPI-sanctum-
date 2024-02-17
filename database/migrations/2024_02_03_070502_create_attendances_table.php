@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->string('address')->nullable();
             $table->string('mobile')->nullable();
+            $table->string('date');
             $table->string('starting_time')->nullable();
             $table->string('end_time')->nullable();
             

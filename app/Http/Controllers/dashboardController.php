@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
-
+use Carbon\CarbonInterval;
 class dashboardController extends Controller
 {
 
@@ -140,16 +140,76 @@ public function deleteMarketer($id){
    // }
 
 public function viewData($id){
+   $date = carbon::now()->setTimezone('Asia/Dhaka')->toDateString();
+
 
     $marketer = DB::table('users')->where('id',$id)->get();
-
+   
      $performance = DB::table('performances')->where('user_id',$id)->get();
 
-     $task = DB::table('tasks')->where('user_id',$id)->get();
+     
+     $todaytask = DB::table('tasks')->where('user_id',$id)->whereDate('date',$date)->count();
 
-   
 
-   return view('dashboard.view',compact('marketer','task','performance'));
+
+    
+
+ 
+       
+
+       
+        $attendances = DB::table('attendances')
+        ->select('starting_time', 'end_time')
+        ->where('user_id', $id)
+        ->whereDate('date', $date)
+        ->get();
+
+ 
+    $totalDuration = 0;
+    $startTime = null;
+    $endTime = null;
+    // Loop through each pair of starting and ending times
+    $attendanceCount = count($attendances);
+for ($i = 0; $i < $attendanceCount; $i++) {
+    $attendance = $attendances[$i];
+
+    // Check if it's a start time
+    if (!isset($startTime) && isset($attendance->starting_time)) {
+        $startTime = Carbon::parse($attendance->starting_time);
+    } elseif (isset($attendance->end_time)) { // It's an end time
+        $endTime = Carbon::parse($attendance->end_time);
+
+      
+        $duration = $endTime->diffInSeconds($startTime);
+        $totalDuration += $duration;
+
+        
+        $startTime = null;
+        $endTime = null;
+    }
+}
+
+      $interval = CarbonInterval::seconds($totalDuration);
+    $totalFormatted = $interval->cascade()->forHumans(['parts' => 3]);
+
+
+    
+   return view('dashboard.view',compact('marketer','performance','totalFormatted','todaytask'));
+}
+
+public function todayTask($id){
+
+ $date = Carbon::now()->toDateString();
+
+   $totaltask = DB::table('tasks')->where('user_id',$id)->whereDate('date',$date)->get();
+
+   return view('dashboard.today_task');
+}
+public function totalTask($id){
+
+   $totaltask = DB::table('tasks')->where('user_id',$id)->get();
+
+   return view('dashboard.total_task',compact('totaltask'));
 }
 
 }

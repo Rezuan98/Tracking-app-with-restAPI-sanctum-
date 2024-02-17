@@ -51,10 +51,11 @@ public function insertTask(Request $request){
     $taskphoto = time() . '.' . $request->file('photo')->extension();
     $request->photo->move(public_path('/taskImages'), $taskphoto);
       $user_id = auth()->user()->id;
+      $date = Carbon::now()->setTimezone('Asia/Dhaka')->toDateString();
    $dataInsert = DB::table('tasks')->insert(
         [
-            'user_id' => $user_id,
-            'name' => $request->name,
+        'user_id' => $user_id,
+        'name' => $request->name,
         'mobile' =>  $request->mobile, 
         'district' =>  $request->district, 
         'upazilla' =>  $request->upazilla, 
@@ -64,6 +65,7 @@ public function insertTask(Request $request){
         'charge' =>  $request->charge, 
         'monthlyfee' =>  $request->monthlyfee, 
         'note' =>  $request->note,  
+        'date' => $date,
         'created_at'=> Carbon::now(),
         'updated_at' => Carbon::now(),
         
@@ -98,8 +100,8 @@ public function startTask(Request $request){
         
 
     $user = auth()->user();
-    $date = Carbon::now()->toDateString();
-     $time = Carbon::now()-> toTimeString();
+    $date = Carbon::now()->setTimezone('Asia/Dhaka')->toDateString();
+     $time = Carbon::now()->setTimezone('Asia/Dhaka')-> toTimeString();
     DB::table('attendances')->insert([
         'user_id' => $user->id,
         'name'=> $user->name,
@@ -115,8 +117,8 @@ public function endTask(Request $request){
         
 
     $user = auth()->user();
-    $date = Carbon::now()->toDateString();
-     $time = Carbon::now()-> toTimeString();
+    $date = Carbon::now()->setTimezone('Asia/Dhaka')->toDateString();
+     $time = Carbon::now()->setTimezone('Asia/Dhaka')-> toTimeString();
     DB::table('attendances')->insert([
         'user_id' => $user->id,
         'name'=> $user->name,

@@ -25,12 +25,15 @@
                 <tr>
                     <td>{{ $index + 1 }}</td>
                     <td>{{ $m->name }}</td>
-                    <td>today working hour </td>
-                    <td>today tasks</td>
+                    <td>
+                       
+                            {{ $totalFormatted }} </td>
+
+                    <td>  <a href="{{route('today.task',$m->id)}}" class="btn btn-success p-3">{{$todaytask}}</a> </td>
               
                     <td>@foreach($performance as $p)
                         @if($p->user_id == $m->id)
-                            {{ $p->total_project }}
+                            <a href="{{route('total.task',$m->id)}}" class="btn btn-danger p-3">{{ $p->total_project }}</a>
                        </td>
              
                  
