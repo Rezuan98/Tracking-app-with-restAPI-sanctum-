@@ -31,16 +31,14 @@
 
                     <td>  <a href="{{route('today.task',$m->id)}}" class="btn btn-success p-3">{{$todaytask}}</a> </td>
               
-                    <td>@foreach($performance as $p)
-                        @if($p->user_id == $m->id)
-                            <a href="{{route('total.task',$m->id)}}" class="btn btn-danger p-3">{{ $p->total_project }}</a>
+                    <td>
+                            <a href="{{route('total.task',$m->id)}}" class="btn btn-danger p-3">{{ $totaltask }}</a>
                        </td>
              
                  
-                    <td> {{ $p->total_workhr }}</td> 
-                    <td> {{ $p->total_income }}</td>
-                    @endif
-                    @endforeach
+                    <td> </td> 
+                    <td> </td>
+                   
                     
                 </tr>
                 @endforeach

@@ -1,9 +1,10 @@
 @extends('dashboard.master')
 
-@section('title','ViewDetails')
+@section('title','TodayTask')
 @section('body')
-<h2>Today Tasks</h2>
+
 <div class="table-responsive">
+    <h3>Today Completed Task of <span class="btn btn-success fw-bold">{{$name2}}</span></h3>
     <table class="table table-hover">
         <thead>
             <tr>
@@ -18,25 +19,25 @@
                 <th>Charge Amount</th>
                 <th>Monthly Fee</th>
                 <th>Note</th>
+                <th>Date</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($totaltask as $index => $item)
+            @foreach ($todaytask as $index => $item)
             
             <tr>
+                
                 <td>{{$index + 1}}</td>
                 <td>{{$item->name}}</td>
                 <td>{{$item->mobile}}</td>
                 <td>{{$item->district}}</td>
-                <td>{{$item->upazila}}</td>
+                <td>{{$item->upazilla}}</td>
                 <td>{{$item->address}}</td>
                 <td>{{$item->status}}</td>
                 <td>{{$item->charge}}</td>
                 <td>{{$item->monthlyfee}}</td>
                 <td>{{$item->note}}</td>
                 <td>{{$item->date}}</td>
-                <td>{{$item->mobile}}</td>
-                <td>{{$item->mobile}}</td>
                 
             </tr>
             @endforeach
@@ -44,4 +45,5 @@
             
         </tbody>
     </table>
+</div>
 @endsection

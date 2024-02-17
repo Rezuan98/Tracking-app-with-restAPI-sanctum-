@@ -3,7 +3,7 @@
 @section('title','TotalTask')
 @section('body')
 <div class="table-responsive">
-    <h3>Total Project Completed:</h3>
+    <h3>Total  Completed of <span class="btn btn-success fw-bold">{{$name2}}</span></h3>
     <table class="table table-hover">
         <thead>
             <tr>

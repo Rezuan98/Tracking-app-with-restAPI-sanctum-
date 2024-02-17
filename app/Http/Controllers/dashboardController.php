@@ -145,7 +145,7 @@ public function viewData($id){
 
     $marketer = DB::table('users')->where('id',$id)->get();
    
-     $performance = DB::table('performances')->where('user_id',$id)->get();
+     $totaltask = DB::table('tasks')->where('user_id',$id)->count();
 
      
      $todaytask = DB::table('tasks')->where('user_id',$id)->whereDate('date',$date)->count();
@@ -194,22 +194,34 @@ for ($i = 0; $i < $attendanceCount; $i++) {
 
 
     
-   return view('dashboard.view',compact('marketer','performance','totalFormatted','todaytask'));
+   return view('dashboard.view',compact('marketer','totaltask','totalFormatted','todaytask'));
 }
+
+
+
 
 public function todayTask($id){
+   $date = Carbon::now()->toDateString();
 
- $date = Carbon::now()->toDateString();
+   $todaytask = DB::table('tasks')->where('user_id', $id)->whereDate('date', $date)->get();
+   $user = DB::table('users')->where('id', $id)->first();
+   $name2 = $user->name;
 
-   $totaltask = DB::table('tasks')->where('user_id',$id)->whereDate('date',$date)->get();
-
-   return view('dashboard.today_task');
+   return view('dashboard.today_task', compact('todaytask', 'name2'));
 }
+
+
+
+
+
+
+
 public function totalTask($id){
 
    $totaltask = DB::table('tasks')->where('user_id',$id)->get();
-
-   return view('dashboard.total_task',compact('totaltask'));
+   $user = DB::table('users')->where('id', $id)->first();
+   $name2 = $user->name;
+   return view('dashboard.total_task',compact('totaltask','name2'));
 }
 
 }
