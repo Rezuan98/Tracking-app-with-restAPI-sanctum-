@@ -36,8 +36,8 @@
                        </td>
              
                  
-                    <td> </td> 
-                    <td> </td>
+                    <td>{{$totalFormatted2}}</td> 
+                    <td>{{$totalincome}} </td>
                    
                     
                 </tr>

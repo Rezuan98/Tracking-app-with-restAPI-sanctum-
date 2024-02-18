@@ -103,29 +103,8 @@
                     </span>
                   </a>
                 </li>
-                <li class="nav-item nav-category">Components</li>
-                <li class="nav-item">
-                  <a class="nav-link" data-bs-toggle="collapse" href="#uiComponents" role="button" aria-expanded="false" aria-controls="uiComponents">
-                    <i class="link-icon" data-feather="feather"></i>
-                    <span class="link-title">Developers Team</span>
-                    <i class="link-arrow" data-feather="chevron-down"></i>
-                  </a>
-                  <div class="collapse" id="uiComponents">
-                    <ul class="nav sub-menu">
-                      <li class="nav-item">
-                        <a href="pages/ui-components/accordion.html" class="nav-link">UI/XI</a>
-                      </li>
-                      <li class="nav-item">
-                        <a href="pages/ui-components/alerts.html" class="nav-link">Frontend</a>
-                      </li>
-                      <li class="nav-item">
-                        <a href="pages/ui-components/alerts.html" class="nav-link">Backend</a>
-                      </li>
-                     
-                    </ul>
-                  </div>
-                </li>
-                
+               
+               
                
                 
                 
@@ -133,13 +112,7 @@
                 
                
                
-                <li class="nav-item nav-category">Documents</li>
-                <li class="nav-item">
-                  <a href="https://www.nobleui.com/html/documentation/docs.html" target="_blank" class="nav-link">
-                    <i class="link-icon" data-feather="hash"></i>
-                    <span class="link-title">Documentation</span>
-                  </a>
-                </li>
+                
               </ul>
             </div>
           </nav>

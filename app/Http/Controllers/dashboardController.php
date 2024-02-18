@@ -168,6 +168,7 @@ public function viewData($id){
     $totalDuration = 0;
     $startTime = null;
     $endTime = null;
+    $thegrandtotal = null;
     // Loop through each pair of starting and ending times
     $attendanceCount = count($attendances);
 for ($i = 0; $i < $attendanceCount; $i++) {
@@ -184,17 +185,57 @@ for ($i = 0; $i < $attendanceCount; $i++) {
         $totalDuration += $duration;
 
         
+
+        
         $startTime = null;
         $endTime = null;
     }
 }
 
       $interval = CarbonInterval::seconds($totalDuration);
+      
     $totalFormatted = $interval->cascade()->forHumans(['parts' => 3]);
-
-
     
-   return view('dashboard.view',compact('marketer','totaltask','totalFormatted','todaytask'));
+    $attendances2 = DB::table('attendances')
+        ->select('starting_time', 'end_time')
+        ->where('user_id', $id)
+        ->get();
+
+ 
+    $totalDuration2 = 0;
+    $startTime = null;
+    $endTime = null;
+   
+    // Loop through each pair of starting and ending times
+    $attendanceCount2 = count($attendances2);
+for ($i = 0; $i < $attendanceCount2; $i++) {
+    $attendance2 = $attendances2[$i];
+
+    // Check if it's a start time
+    if (!isset($startTime) && isset($attendance2->starting_time)) {
+        $startTime = Carbon::parse($attendance2->starting_time);
+    } elseif (isset($attendance2->end_time)) { // It's an end time
+        $endTime = Carbon::parse($attendance2->end_time);
+
+      
+        $duration2 = $endTime->diffInSeconds($startTime);
+        $totalDuration2 = $totalDuration2 + $duration2;
+
+        
+
+        
+       
+        
+    }
+}
+$interval2 = CarbonInterval::seconds($totalDuration2)->cascade();
+      
+$totalFormatted2 = $interval2->cascade()->forHumans(['parts' => 3]);
+$totalFormatted2 = preg_replace('/(\d+ days?)/', '', $totalFormatted2);
+
+$totalincome = DB::table('tasks')->where('user_id',$id)->sum('charge');
+    
+   return view('dashboard.view',compact('marketer','totaltask','totalFormatted','todaytask','totalFormatted2','totalincome'));
 }
 
 
