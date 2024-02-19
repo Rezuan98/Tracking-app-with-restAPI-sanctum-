@@ -26,7 +26,7 @@
 	<!-- End plugin css for this page -->
 
 	<!-- inject:css -->
-	<link rel="stylesheet" href="{{asset('/assets/fonts/feather-font/css/iconfont.css')}}">
+	
 	<link rel="stylesheet" href="{{asset('/assets/vendors/flag-icon-css/css/flag-icon.min.css')}}">
 	<!-- endinject -->
 
@@ -34,7 +34,7 @@
 	<link rel="stylesheet" href="{{asset('/assets/css/demo2/style.css')}}">
   <!-- End layout styles -->
 
-  <link rel="shortcut icon" href="{{asset('/assets/images/favicon.png')}}" />
+  
 </head>
 <body>
 	<div class="main-wrapper">
@@ -63,7 +63,7 @@
 
 			<!-- partial:partials/_footer.html -->
 			<footer class="footer d-flex flex-column flex-md-row align-items-center justify-content-between px-4 py-3 border-top small">
-				<p class="text-muted mb-1 mb-md-0">Copyright © 2024 <a href="https://www.nobleui.com" target="_blank">Freelance It Lab,Mymensingh.</a>.</p>
+				<p class="text-muted mb-1 mb-md-0">Copyright © 2024 <a href="#" target="_blank">Freelance It Lab,Mymensingh.</a>.</p>
 				<p class="text-muted">Go to our Website <i class="mb-1 text-primary ms-1" data-feather="arrow-up-left"></i></p>
 			</footer>
 			<!-- partial -->

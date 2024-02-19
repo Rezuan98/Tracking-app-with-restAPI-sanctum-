@@ -265,4 +265,12 @@ public function totalTask($id){
    return view('dashboard.total_task',compact('totaltask','name2'));
 }
 
+
+public function allAttendance($id){
+
+   $allattendance = DB::table('attendancerecords')->where('user_id',$id)->get();
+
+return view('dashboard.all_attendance',compact('allattendance'));
+}
+
 }

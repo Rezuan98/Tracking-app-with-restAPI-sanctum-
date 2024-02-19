@@ -31,9 +31,15 @@
                            
                            
                             @if($attendance[$item->id])
-                               <span type="button" class="btn btn-outline-info"> Present</span>
+                           
+                                <a href="{{route('all.attendance',$item->id)}}"><span type="button" class="btn btn-outline-info"> Present</span></a>
+                           
+                               
                             @else
-                               <span type="button" class="btn btn-outline-danger"> Absent</span>
+                          
+                               <a href="{{route('all.attendance',$item->id)}}"> <span type="button" class="btn btn-outline-danger"> Absent</span></a>
+                            
+                              
                             @endif
                            
                        

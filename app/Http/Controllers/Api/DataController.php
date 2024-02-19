@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use App\Models\tasks;
 use App\Models\Attendance;
+use Illuminate\Support\Facades\Log;
 
 class DataController extends BaseController
 {
@@ -31,57 +32,88 @@ class DataController extends BaseController
     }
 }
 
-public function insertTask(Request $request){
-    // $validate = $request->validate([
-    //     'name' => 'required',
-    //     'mobile	' => 'required',
-    //     'district	' => 'required',
-    //     'upazilla' => 'required',
-    //     'address	' => 'required',
-    //     'photo'=> 'required',
-    //     'charge'=> 'required',
-    //     'monthlyfee'=> 'required',
-    //     'note'=> 'required',
-    // ]);
+public function insertTask(Request $request) {
+    // You should uncomment this block if you want to validate the request data
+     $validator = Validator::make($request->all(), [
+        'name' => 'required',
+        'mobile' => 'required',
+        'district' => 'required',
+        'upazilla' => 'required',
+        'address' => 'required',
+        'photo' => 'required',
+        'charge' => 'required',
+        'monthlyfee' => 'required',
+        'note' => 'required',
+    ]);
 
-    // if($validator->fails()){
+    if ($validator->fails()) {
+        return $this->sendError('Validation Error', $validator->errors());
+    } 
 
-    //     return $this->sendError('validation Error', $validate->errors());
-    // }
-    $taskphoto = time() . '.' . $request->file('photo')->extension();
+    // Check if photo is present in the request
+    if (!$request->hasFile('photo')) {
+        return $this->sendError('Photo is required');
+    }
+
+    $taskphoto = time() . '.' . $request->file('photo')->getClientOriginalExtension();
     $request->photo->move(public_path('/taskImages'), $taskphoto);
-      $user_id = auth()->user()->id;
-      $date = Carbon::now()->setTimezone('Asia/Dhaka')->toDateString();
-   $dataInsert = DB::table('tasks')->insert(
-        [
+
+    $user_id = auth()->user()->id;
+    $date = Carbon::now()->setTimezone('Asia/Dhaka')->toDateString();
+
+    $checkuser = DB::table('tasks')->where('user_id',$user_id)->wheredate('date',$date)->first();
+    $dataInsert = DB::table('tasks')->insert([
         'user_id' => $user_id,
         'name' => $request->name,
-        'mobile' =>  $request->mobile, 
-        'district' =>  $request->district, 
-        'upazilla' =>  $request->upazilla, 
-        'address' =>  $request->address, 
-        'photo' =>$taskphoto, 
-        'status' => $request->status, 
-        'charge' =>  $request->charge, 
-        'monthlyfee' =>  $request->monthlyfee, 
-        'note' =>  $request->note,  
+        'mobile' => $request->mobile,
+        'district' => $request->district,
+        'upazilla' => $request->upazilla,
+        'address' => $request->address,
+        'photo' => $taskphoto,
+        'status' => $request->status, // Make sure status is available in the request
+        'charge' => $request->charge,
+        'monthlyfee' => $request->monthlyfee,
+        'note' => $request->note,
         'date' => $date,
-        'created_at'=> Carbon::now(),
+        'created_at' => Carbon::now(),
         'updated_at' => Carbon::now(),
-        
-        
+    ]);
+
+    Log::info('User ID: ' . $user_id);
+    // inserting attendancerecord table when marketer inserting task in a day once
+    
+
+    Log::info('Check User: ' . json_encode($checkuser));
+    $present = 'present';
+    $absent = 'absent';
+    
+    if($dataInsert && !$checkuser){
+        $getuser = DB::table('users')->where('id',$user_id)->first();
+        Log::info('get User: ' . json_encode($getuser));
+        $insertattendance = DB::table('attendancerecords')->insert([
+
+            'user_id' => $user_id,
+            'date'  => $date,
+            'Attendance' => $present,
+            'name'     => $getuser->name,
+            'mobile'   => $getuser->phone,
+
+
+
+
         ]);
+        Log::info('get User: ' . json_encode($getuser));
+    }
 
-        $success['Marketer_Name'] = auth()->user()->name;
+    $success['Marketer_Name'] = auth()->user()->name;
 
-        if($dataInsert){
-
-            return $this->sendResponse($success,'Task Data inserted successfully' );
-}else {
-    return $this->sendError('Data could not Insert',);
+    if ($dataInsert) {
+        return $this->sendResponse($success, 'Task Data inserted successfully');
+    } else {
+        return $this->sendError('Data could not be inserted');
+    }
 }
 
-}
 
 public function getTaskData(Request $request){
 

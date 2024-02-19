@@ -20,10 +20,11 @@ return new class extends Migration
             $table->string('upazilla');
             $table->string('address');
             $table->string('photo')->nullable();
-            $table->string('status');
+            $table->enum('status',['pending','completed'])->default('pending');
             $table->string('charge')->nullable();
             $table->string('monthlyfee')->nullable();
             $table->string('note')->nullable();
+            $table->date('date');
             
             $table->timestamps();
         });

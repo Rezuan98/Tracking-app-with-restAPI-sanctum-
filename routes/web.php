@@ -26,4 +26,5 @@ Route::get('/delete/marketer/{id}',[dashboardController::class,'deleteMarketer']
 Route::get('/view/data/{id}',[dashboardController::class,'viewData'])->name('view.data');
 Route::get('/today/task/{id}',[dashboardController::class,'todayTask'])->name('today.task');
 Route::get('/total/task/{id}',[dashboardController::class,'totalTask'])->name('total.task');
+Route::get('/all/attendance/{id}',[dashboardController::class,'allAttendance'])->name('all.attendance');
 
