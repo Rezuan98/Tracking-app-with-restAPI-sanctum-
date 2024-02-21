@@ -8,6 +8,7 @@
                 <th>Sl</th>
                 <th>Date</th>
                 <th>Attendance</th>
+               
                 <th>Name</th>
                 <th>Mobile</th>
                 
@@ -20,6 +21,7 @@
                 <td>{{$index + 1}}</td>
                 <td>{{$aa->date}}</td>
                 <td><span class="btn btn-outline-info">{{$aa->Attendance}}</span></td>
+                
                 <td>{{$aa->name}}</td>
                 <td>{{$aa->mobile}}</td>
                 

@@ -13,9 +13,9 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
+//  start routes for admin dashboard
 Route::get('/',[dashboardController::class,'login'])->name('login');
-Route::get('/home',[dashboardController::class,'home']);
+Route::get('/home',[dashboardController::class,'home'])->name('home');
 Route::get('/add/marketer',[dashboardController::class,'addMarketer'])->name('add.marketer');
 Route::post('/add/marketer/data',[dashboardController::class,'addMarketerData'])->name('add.marketer.data');
 Route::get('/all/marketer',[dashboardController::class,'allMarketer'])->name('all.marketer');
@@ -28,3 +28,4 @@ Route::get('/today/task/{id}',[dashboardController::class,'todayTask'])->name('t
 Route::get('/total/task/{id}',[dashboardController::class,'totalTask'])->name('total.task');
 Route::get('/all/attendance/{id}',[dashboardController::class,'allAttendance'])->name('all.attendance');
 
+//end routes for admin dashboard

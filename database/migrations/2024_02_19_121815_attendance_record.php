@@ -16,6 +16,7 @@ return new class extends Migration
             $table->integer('user_id');
             $table->date('date');
             $table->string('Attendance')->nullable();
+           
             $table->string('name')->nullable();
             $table->string('mobile')->nullable();
            

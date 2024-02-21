@@ -242,7 +242,7 @@ $totalincome = DB::table('tasks')->where('user_id',$id)->sum('charge');
 
 
 public function todayTask($id){
-   $date = Carbon::now()->toDateString();
+   $date = Carbon::now()->setTimezone('Asia/Dhaka')->toDateString();
 
    $todaytask = DB::table('tasks')->where('user_id', $id)->whereDate('date', $date)->get();
    $user = DB::table('users')->where('id', $id)->first();
@@ -267,8 +267,13 @@ public function totalTask($id){
 
 
 public function allAttendance($id){
+   $date = Carbon::now()->setTimezone('Asia/Dhaka')->toDateString();
+
 
    $allattendance = DB::table('attendancerecords')->where('user_id',$id)->get();
+
+  
+
 
 return view('dashboard.all_attendance',compact('allattendance'));
 }

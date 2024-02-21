@@ -90,11 +90,14 @@ public function insertTask(Request $request) {
     if($dataInsert && !$checkuser){
         $getuser = DB::table('users')->where('id',$user_id)->first();
         Log::info('get User: ' . json_encode($getuser));
+
+        
         $insertattendance = DB::table('attendancerecords')->insert([
 
             'user_id' => $user_id,
             'date'  => $date,
             'Attendance' => $present,
+           
             'name'     => $getuser->name,
             'mobile'   => $getuser->phone,
 

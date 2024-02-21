@@ -1,11 +1,16 @@
 @extends('dashboard.master')
 
-@section('title','Admin-FrelanceIT')
+@section('title','AddMarketer')
 @section('body')
 <h3>Add Marketer</h5>
+    <br>
+    <a href="{{route('all.marketer')}}"><button class="btn btn-success">View All Marketer</button></a>
+    <br> <br>
 <div class="card">
     
     <div class="card-body">
+
+        
         
         <form action="{{route('add.marketer.data')}}" method="post" enctype="multipart/form-data">
 

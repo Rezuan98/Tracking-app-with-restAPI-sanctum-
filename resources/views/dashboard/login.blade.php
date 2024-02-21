@@ -27,9 +27,9 @@
 	<!-- End plugin css for this page -->
 
 	<!-- inject:css -->
-	<link rel="stylesheet" href="{{asset('/assets/fonts/feather-font/css/iconfont.css')}}">
+	{{-- <link rel="stylesheet" href="{{asset('/assets/fonts/feather-font/css/iconfont.css')}}">--}}
 	<link rel="stylesheet" href="{{asset('/assets/vendors/flag-icon-css/css/flag-icon.min.css')}}">
-	<!-- endinject -->
+	<!-- endinject --> 
 
   <!-- Layout styles -->  
 	<link rel="stylesheet" href="{{asset('/assets/css/demo2/style.css')}}">
